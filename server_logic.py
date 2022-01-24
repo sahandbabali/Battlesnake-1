@@ -1,3 +1,11 @@
+"""
+todo
+
+- when choosing between random movements try giving more prriority to movements to the opposit side of the board comparing to snake head
+"""
+
+
+
 import random
 from typing import List, Dict
 
@@ -108,6 +116,31 @@ def choose_move(data: dict) -> str:
             if "left" in possible_moves: possible_moves.remove("left")
 
     # TODO: Using information from 'data', make your Battlesnake move towards a piece of food on the board
+
+
+    # first idea => follow first item in food array
+
+    if data["board"]["food"]:
+      if data["board"]["food"][0]["y"] > my_head["y"]:
+        if "up" in possible_moves:
+          return "up"
+        
+      elif data["board"]["food"][0]["y"] ==  my_head["y"]:
+        if  data["board"]["food"][0]["x"] >  my_head["x"]:
+          if "right" in possible_moves:
+            return "right"
+        else:
+          if "left" in possible_moves:
+            return "left"
+      else:
+        if "down" in possible_moves:
+          return "down"
+
+
+
+
+    
+
 
     # Choose a random direction from the remaining possible_moves to move in, and then return that move
     move = random.choice(possible_moves)
