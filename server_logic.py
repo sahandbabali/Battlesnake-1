@@ -62,9 +62,9 @@ def choose_move(data: dict) -> str:
 
     # TODO: Using information from 'data', find the edges of the board and don't let your Battlesnake move beyond them
     board_height = data["board"]["height"]
-    print(board_height)
+    
     board_width = data["board"]["width"]
-    print(board_width)
+    
     if my_head["y"] == 0:
       possible_moves.remove("down")
     if my_head["x"] == board_width -1:
@@ -76,6 +76,27 @@ def choose_move(data: dict) -> str:
 
     # TODO Using information from 'data', don't let your Battlesnake pick a move that would hit its own body
 
+    #check down x =>  my_head["x"] y => my_head["y"]-1
+    for bodypart in my_body:
+      if bodypart["x"] == my_head["x"] and bodypart["y"] == my_head["y"]-1:
+        if "down" in possible_moves: possible_moves.remove("down")
+
+    #check right x =>  my_head["x"]+1 y => my_head["y"]
+    for bodypart in my_body:
+      if bodypart["x"] == my_head["x"]+1 and bodypart["y"] == my_head["y"]:
+        
+        if "right" in possible_moves: possible_moves.remove("right")
+    #check up x =>  my_head["x"] y => my_head["y"]+1
+    for bodypart in my_body:
+      if bodypart["x"] == my_head["x"] and bodypart["y"] == my_head["y"]+1:
+      
+        if "up" in possible_moves: possible_moves.remove("up")
+
+    #check left x =>  my_head["x"]-1 y => my_head["y"]
+    for bodypart in my_body:
+      if bodypart["x"] == my_head["x"]-1 and bodypart["y"] == my_head["y"]:
+        
+        if "left" in possible_moves: possible_moves.remove("left")
 
 
     # TODO: Using information from 'data', don't let your Battlesnake pick a move that would collide with another Battlesnake
